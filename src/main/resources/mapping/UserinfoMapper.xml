@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pdaserver.dao.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Userinfo">
+    <id column="UserNO" jdbcType="VARCHAR" property="userno" />
+    <result column="UserId" jdbcType="VARCHAR" property="userid" />
+    <result column="Pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="FacNO" jdbcType="VARCHAR" property="facno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UserNO, UserId, Pwd, FacNO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where UserNO = #{userno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userinfo
+    where UserNO = #{userno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pdaserver.entity.Userinfo">
+    insert into userinfo (UserNO, UserId, Pwd, 
+      FacNO)
+    values (#{userno,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{facno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Userinfo">
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userno != null">
+        UserNO,
+      </if>
+      <if test="userid != null">
+        UserId,
+      </if>
+      <if test="pwd != null">
+        Pwd,
+      </if>
+      <if test="facno != null">
+        FacNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="facno != null">
+        #{facno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pdaserver.entity.Userinfo">
+    update userinfo
+    <set>
+      <if test="userid != null">
+        UserId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        Pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="facno != null">
+        FacNO = #{facno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserNO = #{userno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Userinfo">
+    update userinfo
+    set UserId = #{userid,jdbcType=VARCHAR},
+      Pwd = #{pwd,jdbcType=VARCHAR},
+      FacNO = #{facno,jdbcType=VARCHAR}
+    where UserNO = #{userno,jdbcType=VARCHAR}
+  </update>
+
+  <select id="checkUsername" resultType="int" parameterType="string">
+    select count(1) from userinfo
+    where UserId=#{username}
+  </select>
+
+  <select id="selectlogin" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from userinfo
+    where UserId=#{username}
+    and Pwd=#{password}
+  </select>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pdaserver.dao.InvoiceinfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Invoiceinfo">
+    <id column="InvoiceNO" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="FactoryName" jdbcType="VARCHAR" property="factoryname" />
+    <result column="FactoryID" jdbcType="VARCHAR" property="factoryid" />
+    <result column="FactoryLineID" jdbcType="VARCHAR" property="factorylineid" />
+    <result column="CustomerID" jdbcType="VARCHAR" property="customerid" />
+    <result column="CustomerName" jdbcType="VARCHAR" property="customername" />
+    <result column="PickDate" jdbcType="TIMESTAMP" property="pickdate" />
+    <result column="PlanCount" jdbcType="INTEGER" property="plancount" />
+    <result column="RealCount" jdbcType="INTEGER" property="realcount" />
+    <result column="RtnCount" jdbcType="INTEGER" property="rtncount" />
+    <result column="Operator" jdbcType="VARCHAR" property="operator" />
+    <result column="Descrip" jdbcType="VARCHAR" property="descrip" />
+    <result column="IsUpLoad" jdbcType="INTEGER" property="isupload" />
+    <result column="InvoiceType" jdbcType="INTEGER" property="invoicetype" />
+    <result column="FacNo" jdbcType="VARCHAR" property="facno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    InvoiceNO, FactoryName, FactoryID, FactoryLineID, CustomerID, CustomerName, PickDate, 
+    PlanCount, RealCount, RtnCount, Operator, Descrip, IsUpLoad, InvoiceType, FacNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from invoiceinfo
+    where InvoiceNO = #{invoiceno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from invoiceinfo
+    where InvoiceNO = #{invoiceno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pdaserver.entity.Invoiceinfo">
+    insert into invoiceinfo (InvoiceNO, FactoryName, FactoryID, 
+      FactoryLineID, CustomerID, CustomerName, 
+      PickDate, PlanCount, RealCount, 
+      RtnCount, Operator, Descrip, 
+      IsUpLoad, InvoiceType, FacNo
+      )
+    values (#{invoiceno,jdbcType=VARCHAR}, #{factoryname,jdbcType=VARCHAR}, #{factoryid,jdbcType=VARCHAR}, 
+      #{factorylineid,jdbcType=VARCHAR}, #{customerid,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
+      #{pickdate,jdbcType=TIMESTAMP}, #{plancount,jdbcType=INTEGER}, #{realcount,jdbcType=INTEGER}, 
+      #{rtncount,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, #{descrip,jdbcType=VARCHAR}, 
+      #{isupload,jdbcType=INTEGER}, #{invoicetype,jdbcType=INTEGER}, #{facno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Invoiceinfo">
+    insert into invoiceinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invoiceno != null">
+        InvoiceNO,
+      </if>
+      <if test="factoryname != null">
+        FactoryName,
+      </if>
+      <if test="factoryid != null">
+        FactoryID,
+      </if>
+      <if test="factorylineid != null">
+        FactoryLineID,
+      </if>
+      <if test="customerid != null">
+        CustomerID,
+      </if>
+      <if test="customername != null">
+        CustomerName,
+      </if>
+      <if test="pickdate != null">
+        PickDate,
+      </if>
+      <if test="plancount != null">
+        PlanCount,
+      </if>
+      <if test="realcount != null">
+        RealCount,
+      </if>
+      <if test="rtncount != null">
+        RtnCount,
+      </if>
+      <if test="operator != null">
+        Operator,
+      </if>
+      <if test="descrip != null">
+        Descrip,
+      </if>
+      <if test="isupload != null">
+        IsUpLoad,
+      </if>
+      <if test="invoicetype != null">
+        InvoiceType,
+      </if>
+      <if test="facno != null">
+        FacNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryname != null">
+        #{factoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryid != null">
+        #{factoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="factorylineid != null">
+        #{factorylineid,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null">
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null">
+        #{pickdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plancount != null">
+        #{plancount,jdbcType=INTEGER},
+      </if>
+      <if test="realcount != null">
+        #{realcount,jdbcType=INTEGER},
+      </if>
+      <if test="rtncount != null">
+        #{rtncount,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="invoicetype != null">
+        #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="facno != null">
+        #{facno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pdaserver.entity.Invoiceinfo">
+    update invoiceinfo
+    <set>
+      <if test="factoryname != null">
+        FactoryName = #{factoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryid != null">
+        FactoryID = #{factoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="factorylineid != null">
+        FactoryLineID = #{factorylineid,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null">
+        CustomerID = #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null">
+        CustomerName = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null">
+        PickDate = #{pickdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plancount != null">
+        PlanCount = #{plancount,jdbcType=INTEGER},
+      </if>
+      <if test="realcount != null">
+        RealCount = #{realcount,jdbcType=INTEGER},
+      </if>
+      <if test="rtncount != null">
+        RtnCount = #{rtncount,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        Operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        Descrip = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        IsUpLoad = #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="invoicetype != null">
+        InvoiceType = #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="facno != null">
+        FacNo = #{facno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where InvoiceNO = #{invoiceno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Invoiceinfo">
+    update invoiceinfo
+    set FactoryName = #{factoryname,jdbcType=VARCHAR},
+      FactoryID = #{factoryid,jdbcType=VARCHAR},
+      FactoryLineID = #{factorylineid,jdbcType=VARCHAR},
+      CustomerID = #{customerid,jdbcType=VARCHAR},
+      CustomerName = #{customername,jdbcType=VARCHAR},
+      PickDate = #{pickdate,jdbcType=TIMESTAMP},
+      PlanCount = #{plancount,jdbcType=INTEGER},
+      RealCount = #{realcount,jdbcType=INTEGER},
+      RtnCount = #{rtncount,jdbcType=INTEGER},
+      Operator = #{operator,jdbcType=VARCHAR},
+      Descrip = #{descrip,jdbcType=VARCHAR},
+      IsUpLoad = #{isupload,jdbcType=INTEGER},
+      InvoiceType = #{invoicetype,jdbcType=INTEGER},
+      FacNo = #{facno,jdbcType=VARCHAR}
+    where InvoiceNO = #{invoiceno,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pdaserver.dao.OrderinfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Orderinfo">
+    <id column="OrderNO" jdbcType="VARCHAR" property="orderno" />
+    <result column="FactoryName" jdbcType="VARCHAR" property="factoryname" />
+    <result column="FactoryID" jdbcType="VARCHAR" property="factoryid" />
+    <result column="FactoryLineID" jdbcType="VARCHAR" property="factorylineid" />
+    <result column="BatchNO" jdbcType="VARCHAR" property="batchno" />
+    <result column="ProNO" jdbcType="VARCHAR" property="prono" />
+    <result column="ProName" jdbcType="VARCHAR" property="proname" />
+    <result column="PrdStyle" jdbcType="VARCHAR" property="prdstyle" />
+    <result column="PlanCount" jdbcType="INTEGER" property="plancount" />
+    <result column="RealCount" jdbcType="INTEGER" property="realcount" />
+    <result column="StackTotal" jdbcType="INTEGER" property="stacktotal" />
+    <result column="StartDate" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="FinishDate" jdbcType="TIMESTAMP" property="finishdate" />
+    <result column="isFinish" jdbcType="INTEGER" property="isfinish" />
+    <result column="Operator" jdbcType="VARCHAR" property="operator" />
+    <result column="Descrip" jdbcType="VARCHAR" property="descrip" />
+    <result column="IsUpLoad" jdbcType="INTEGER" property="isupload" />
+    <result column="GetTime" jdbcType="TIMESTAMP" property="gettime" />
+    <result column="UpLoadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="FacNo" jdbcType="VARCHAR" property="facno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    OrderNO, FactoryName, FactoryID, FactoryLineID, BatchNO, ProNO, ProName, PrdStyle, 
+    PlanCount, RealCount, StackTotal, StartDate, FinishDate, isFinish, Operator, Descrip, 
+    IsUpLoad, GetTime, UpLoadTime, FacNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo
+    where OrderNO = #{orderno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from orderinfo
+    where OrderNO = #{orderno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pdaserver.entity.Orderinfo">
+    insert into orderinfo (OrderNO, FactoryName, FactoryID, 
+      FactoryLineID, BatchNO, ProNO, 
+      ProName, PrdStyle, PlanCount, 
+      RealCount, StackTotal, StartDate, 
+      FinishDate, isFinish, Operator, 
+      Descrip, IsUpLoad, GetTime, 
+      UpLoadTime, FacNo)
+    values (#{orderno,jdbcType=VARCHAR}, #{factoryname,jdbcType=VARCHAR}, #{factoryid,jdbcType=VARCHAR}, 
+      #{factorylineid,jdbcType=VARCHAR}, #{batchno,jdbcType=VARCHAR}, #{prono,jdbcType=VARCHAR}, 
+      #{proname,jdbcType=VARCHAR}, #{prdstyle,jdbcType=VARCHAR}, #{plancount,jdbcType=INTEGER}, 
+      #{realcount,jdbcType=INTEGER}, #{stacktotal,jdbcType=INTEGER}, #{startdate,jdbcType=TIMESTAMP}, 
+      #{finishdate,jdbcType=TIMESTAMP}, #{isfinish,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, 
+      #{descrip,jdbcType=VARCHAR}, #{isupload,jdbcType=INTEGER}, #{gettime,jdbcType=TIMESTAMP}, 
+      #{uploadtime,jdbcType=TIMESTAMP}, #{facno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Orderinfo">
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderno != null">
+        OrderNO,
+      </if>
+      <if test="factoryname != null">
+        FactoryName,
+      </if>
+      <if test="factoryid != null">
+        FactoryID,
+      </if>
+      <if test="factorylineid != null">
+        FactoryLineID,
+      </if>
+      <if test="batchno != null">
+        BatchNO,
+      </if>
+      <if test="prono != null">
+        ProNO,
+      </if>
+      <if test="proname != null">
+        ProName,
+      </if>
+      <if test="prdstyle != null">
+        PrdStyle,
+      </if>
+      <if test="plancount != null">
+        PlanCount,
+      </if>
+      <if test="realcount != null">
+        RealCount,
+      </if>
+      <if test="stacktotal != null">
+        StackTotal,
+      </if>
+      <if test="startdate != null">
+        StartDate,
+      </if>
+      <if test="finishdate != null">
+        FinishDate,
+      </if>
+      <if test="isfinish != null">
+        isFinish,
+      </if>
+      <if test="operator != null">
+        Operator,
+      </if>
+      <if test="descrip != null">
+        Descrip,
+      </if>
+      <if test="isupload != null">
+        IsUpLoad,
+      </if>
+      <if test="gettime != null">
+        GetTime,
+      </if>
+      <if test="uploadtime != null">
+        UpLoadTime,
+      </if>
+      <if test="facno != null">
+        FacNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryname != null">
+        #{factoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryid != null">
+        #{factoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="factorylineid != null">
+        #{factorylineid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null">
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="prono != null">
+        #{prono,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="prdstyle != null">
+        #{prdstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="plancount != null">
+        #{plancount,jdbcType=INTEGER},
+      </if>
+      <if test="realcount != null">
+        #{realcount,jdbcType=INTEGER},
+      </if>
+      <if test="stacktotal != null">
+        #{stacktotal,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishdate != null">
+        #{finishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isfinish != null">
+        #{isfinish,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null">
+        #{gettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facno != null">
+        #{facno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pdaserver.entity.Orderinfo">
+    update orderinfo
+    <set>
+      <if test="factoryname != null">
+        FactoryName = #{factoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryid != null">
+        FactoryID = #{factoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="factorylineid != null">
+        FactoryLineID = #{factorylineid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null">
+        BatchNO = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="prono != null">
+        ProNO = #{prono,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        ProName = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="prdstyle != null">
+        PrdStyle = #{prdstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="plancount != null">
+        PlanCount = #{plancount,jdbcType=INTEGER},
+      </if>
+      <if test="realcount != null">
+        RealCount = #{realcount,jdbcType=INTEGER},
+      </if>
+      <if test="stacktotal != null">
+        StackTotal = #{stacktotal,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        StartDate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishdate != null">
+        FinishDate = #{finishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isfinish != null">
+        isFinish = #{isfinish,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        Operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        Descrip = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        IsUpLoad = #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null">
+        GetTime = #{gettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadtime != null">
+        UpLoadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facno != null">
+        FacNo = #{facno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OrderNO = #{orderno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Orderinfo">
+    update orderinfo
+    set FactoryName = #{factoryname,jdbcType=VARCHAR},
+      FactoryID = #{factoryid,jdbcType=VARCHAR},
+      FactoryLineID = #{factorylineid,jdbcType=VARCHAR},
+      BatchNO = #{batchno,jdbcType=VARCHAR},
+      ProNO = #{prono,jdbcType=VARCHAR},
+      ProName = #{proname,jdbcType=VARCHAR},
+      PrdStyle = #{prdstyle,jdbcType=VARCHAR},
+      PlanCount = #{plancount,jdbcType=INTEGER},
+      RealCount = #{realcount,jdbcType=INTEGER},
+      StackTotal = #{stacktotal,jdbcType=INTEGER},
+      StartDate = #{startdate,jdbcType=TIMESTAMP},
+      FinishDate = #{finishdate,jdbcType=TIMESTAMP},
+      isFinish = #{isfinish,jdbcType=INTEGER},
+      Operator = #{operator,jdbcType=VARCHAR},
+      Descrip = #{descrip,jdbcType=VARCHAR},
+      IsUpLoad = #{isupload,jdbcType=INTEGER},
+      GetTime = #{gettime,jdbcType=TIMESTAMP},
+      UpLoadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      FacNo = #{facno,jdbcType=VARCHAR}
+    where OrderNO = #{orderno,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pdaserver.dao.InvoicedtlMapper">
+  <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Invoicedtl">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="InvoiceNO" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="BacketNO" jdbcType="VARCHAR" property="backetno" />
+    <result column="InvoiceTime" jdbcType="TIMESTAMP" property="invoicetime" />
+    <result column="DeliverMode" jdbcType="INTEGER" property="delivermode" />
+    <result column="IsUpLoad" jdbcType="INTEGER" property="isupload" />
+    <result column="FacNo" jdbcType="VARCHAR" property="facno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, InvoiceNO, BacketNO, InvoiceTime, DeliverMode, IsUpLoad, FacNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from invoicedtl
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from invoicedtl
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pdaserver.entity.Invoicedtl">
+    insert into invoicedtl (ID, InvoiceNO, BacketNO, 
+      InvoiceTime, DeliverMode, IsUpLoad, 
+      FacNo)
+    values (#{id,jdbcType=CHAR}, #{invoiceno,jdbcType=VARCHAR}, #{backetno,jdbcType=VARCHAR}, 
+      #{invoicetime,jdbcType=TIMESTAMP}, #{delivermode,jdbcType=INTEGER}, #{isupload,jdbcType=INTEGER}, 
+      #{facno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Invoicedtl">
+    insert into invoicedtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="invoiceno != null">
+        InvoiceNO,
+      </if>
+      <if test="backetno != null">
+        BacketNO,
+      </if>
+      <if test="invoicetime != null">
+        InvoiceTime,
+      </if>
+      <if test="delivermode != null">
+        DeliverMode,
+      </if>
+      <if test="isupload != null">
+        IsUpLoad,
+      </if>
+      <if test="facno != null">
+        FacNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="backetno != null">
+        #{backetno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetime != null">
+        #{invoicetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delivermode != null">
+        #{delivermode,jdbcType=INTEGER},
+      </if>
+      <if test="isupload != null">
+        #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="facno != null">
+        #{facno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pdaserver.entity.Invoicedtl">
+    update invoicedtl
+    <set>
+      <if test="invoiceno != null">
+        InvoiceNO = #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="backetno != null">
+        BacketNO = #{backetno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetime != null">
+        InvoiceTime = #{invoicetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delivermode != null">
+        DeliverMode = #{delivermode,jdbcType=INTEGER},
+      </if>
+      <if test="isupload != null">
+        IsUpLoad = #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="facno != null">
+        FacNo = #{facno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Invoicedtl">
+    update invoicedtl
+    set InvoiceNO = #{invoiceno,jdbcType=VARCHAR},
+      BacketNO = #{backetno,jdbcType=VARCHAR},
+      InvoiceTime = #{invoicetime,jdbcType=TIMESTAMP},
+      DeliverMode = #{delivermode,jdbcType=INTEGER},
+      IsUpLoad = #{isupload,jdbcType=INTEGER},
+      FacNo = #{facno,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

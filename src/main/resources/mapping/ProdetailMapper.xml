@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pdaserver.dao.ProdetailMapper">
+  <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Prodetail">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="OrderNO" jdbcType="VARCHAR" property="orderno" />
+    <result column="BacketNO" jdbcType="VARCHAR" property="backetno" />
+    <result column="StackNO" jdbcType="VARCHAR" property="stackno" />
+    <result column="CNT" jdbcType="INTEGER" property="cnt" />
+    <result column="StackCount" jdbcType="INTEGER" property="stackcount" />
+    <result column="ProDate" jdbcType="TIMESTAMP" property="prodate" />
+    <result column="Operator" jdbcType="VARCHAR" property="operator" />
+    <result column="IsUpload" jdbcType="INTEGER" property="isupload" />
+    <result column="IsDelete" jdbcType="INTEGER" property="isdelete" />
+    <result column="DelDate" jdbcType="TIMESTAMP" property="deldate" />
+    <result column="IsInvoice" jdbcType="INTEGER" property="isinvoice" />
+    <result column="GetTime" jdbcType="TIMESTAMP" property="gettime" />
+    <result column="UpLoadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="FacNo" jdbcType="VARCHAR" property="facno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, OrderNO, BacketNO, StackNO, CNT, StackCount, ProDate, Operator, IsUpload, IsDelete, 
+    DelDate, IsInvoice, GetTime, UpLoadTime, FacNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prodetail
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from prodetail
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pdaserver.entity.Prodetail">
+    insert into prodetail (ID, OrderNO, BacketNO, 
+      StackNO, CNT, StackCount, 
+      ProDate, Operator, IsUpload, 
+      IsDelete, DelDate, IsInvoice, 
+      GetTime, UpLoadTime, FacNo
+      )
+    values (#{id,jdbcType=CHAR}, #{orderno,jdbcType=VARCHAR}, #{backetno,jdbcType=VARCHAR}, 
+      #{stackno,jdbcType=VARCHAR}, #{cnt,jdbcType=INTEGER}, #{stackcount,jdbcType=INTEGER}, 
+      #{prodate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{isupload,jdbcType=INTEGER}, 
+      #{isdelete,jdbcType=INTEGER}, #{deldate,jdbcType=TIMESTAMP}, #{isinvoice,jdbcType=INTEGER}, 
+      #{gettime,jdbcType=TIMESTAMP}, #{uploadtime,jdbcType=TIMESTAMP}, #{facno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Prodetail">
+    insert into prodetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderno != null">
+        OrderNO,
+      </if>
+      <if test="backetno != null">
+        BacketNO,
+      </if>
+      <if test="stackno != null">
+        StackNO,
+      </if>
+      <if test="cnt != null">
+        CNT,
+      </if>
+      <if test="stackcount != null">
+        StackCount,
+      </if>
+      <if test="prodate != null">
+        ProDate,
+      </if>
+      <if test="operator != null">
+        Operator,
+      </if>
+      <if test="isupload != null">
+        IsUpload,
+      </if>
+      <if test="isdelete != null">
+        IsDelete,
+      </if>
+      <if test="deldate != null">
+        DelDate,
+      </if>
+      <if test="isinvoice != null">
+        IsInvoice,
+      </if>
+      <if test="gettime != null">
+        GetTime,
+      </if>
+      <if test="uploadtime != null">
+        UpLoadTime,
+      </if>
+      <if test="facno != null">
+        FacNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="backetno != null">
+        #{backetno,jdbcType=VARCHAR},
+      </if>
+      <if test="stackno != null">
+        #{stackno,jdbcType=VARCHAR},
+      </if>
+      <if test="cnt != null">
+        #{cnt,jdbcType=INTEGER},
+      </if>
+      <if test="stackcount != null">
+        #{stackcount,jdbcType=INTEGER},
+      </if>
+      <if test="prodate != null">
+        #{prodate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deldate != null">
+        #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isinvoice != null">
+        #{isinvoice,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null">
+        #{gettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facno != null">
+        #{facno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pdaserver.entity.Prodetail">
+    update prodetail
+    <set>
+      <if test="orderno != null">
+        OrderNO = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="backetno != null">
+        BacketNO = #{backetno,jdbcType=VARCHAR},
+      </if>
+      <if test="stackno != null">
+        StackNO = #{stackno,jdbcType=VARCHAR},
+      </if>
+      <if test="cnt != null">
+        CNT = #{cnt,jdbcType=INTEGER},
+      </if>
+      <if test="stackcount != null">
+        StackCount = #{stackcount,jdbcType=INTEGER},
+      </if>
+      <if test="prodate != null">
+        ProDate = #{prodate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        Operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="isupload != null">
+        IsUpload = #{isupload,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null">
+        IsDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deldate != null">
+        DelDate = #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isinvoice != null">
+        IsInvoice = #{isinvoice,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null">
+        GetTime = #{gettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadtime != null">
+        UpLoadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="facno != null">
+        FacNo = #{facno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Prodetail">
+    update prodetail
+    set OrderNO = #{orderno,jdbcType=VARCHAR},
+      BacketNO = #{backetno,jdbcType=VARCHAR},
+      StackNO = #{stackno,jdbcType=VARCHAR},
+      CNT = #{cnt,jdbcType=INTEGER},
+      StackCount = #{stackcount,jdbcType=INTEGER},
+      ProDate = #{prodate,jdbcType=TIMESTAMP},
+      Operator = #{operator,jdbcType=VARCHAR},
+      IsUpload = #{isupload,jdbcType=INTEGER},
+      IsDelete = #{isdelete,jdbcType=INTEGER},
+      DelDate = #{deldate,jdbcType=TIMESTAMP},
+      IsInvoice = #{isinvoice,jdbcType=INTEGER},
+      GetTime = #{gettime,jdbcType=TIMESTAMP},
+      UpLoadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      FacNo = #{facno,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
