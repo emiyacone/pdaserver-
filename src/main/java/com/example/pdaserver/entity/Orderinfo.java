@@ -2,32 +2,33 @@ package com.example.pdaserver.entity;
 
 import java.util.Date;
 
+// 工单
 public class Orderinfo {
-    private String orderno;
+    private String orderno;//工单号
 
-    private String factoryname;
+    private String factoryname;//工厂名称
 
-    private String factoryid;
+    private String factoryid;//工厂id
 
     private String factorylineid;
 
-    private String batchno;
+    private String batchno;//批次号
 
-    private String prono;
+    private String prono;//产品号
 
-    private String proname;
+    private String proname;//产品名称
 
-    private String prdstyle;
+    private String prdstyle;//产品规格
 
-    private Integer plancount;
+    private Integer plancount;// 计划产量
 
-    private Integer realcount;
+    private Integer realcount;// 实际产量
 
-    private Integer stacktotal;
+    private Integer stacktotal;// 板数
 
-    private Date startdate;
+    private Date startdate;// 开始时间
 
-    private Date finishdate;
+    private Date finishdate;// 完成时间
 
     private Integer isfinish;
 
@@ -35,7 +36,7 @@ public class Orderinfo {
 
     private String descrip;
 
-    private Integer isupload;
+    private Integer isupload;// 上传服务器状态
 
     private Date gettime;
 

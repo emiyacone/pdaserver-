@@ -267,4 +267,43 @@
       FacNo = #{facno,jdbcType=VARCHAR}
     where OrderNO = #{orderno,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectlist" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from orderinfo
+    order by OrderNO asc
+  </select>
+
+  <select id="selectlistbyfacno" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List"/>
+    from orderinfo
+    where FacNo = #{facno,jdbcType=VARCHAR}
+    order by OrderNO asc
+  </select>
+
+  <select id="selectlistbyFacNoAndOrerNoAndBacketNoAndProductNoAndProName" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from orderinfo
+    <where>
+      <if test="OrderNo!=null">
+        and OrderNO like #{OrderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="BacketNo!=null">
+        and BatchNO like #{BacketNo,jdbcType=VARCHAR}
+      </if>
+      <if test="ProNo!=null">
+        and ProNO like #{ProNo,jdbcType=VARCHAR}
+      </if>
+      <if test="Proname!=null">
+        and ProName like #{Proname,jdbcType=VARCHAR}
+      </if>
+      <if test="facno!=null">
+        and FacNo = #{facno,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by OrderNO asc
+  </select>
 </mapper>

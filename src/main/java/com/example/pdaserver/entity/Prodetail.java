@@ -2,6 +2,7 @@ package com.example.pdaserver.entity;
 
 import java.util.Date;
 
+// 产品明细
 public class Prodetail {
     private String id;
 

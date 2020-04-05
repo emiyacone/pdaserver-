@@ -2,6 +2,8 @@ package com.example.pdaserver.dao;
 
 import com.example.pdaserver.entity.Prodetail;
 
+import java.util.List;
+
 public interface ProdetailMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,8 @@ public interface ProdetailMapper {
     int updateByPrimaryKeySelective(Prodetail record);
 
     int updateByPrimaryKey(Prodetail record);
+
+    List<Prodetail> selectlist();
+
+    List<Prodetail> selectlistbyfacno(String facno);
 }

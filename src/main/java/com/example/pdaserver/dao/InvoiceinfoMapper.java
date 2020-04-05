@@ -2,6 +2,8 @@ package com.example.pdaserver.dao;
 
 import com.example.pdaserver.entity.Invoiceinfo;
 
+import java.util.List;
+
 public interface InvoiceinfoMapper {
     int deleteByPrimaryKey(String invoiceno);
 
@@ -14,4 +16,8 @@ public interface InvoiceinfoMapper {
     int updateByPrimaryKeySelective(Invoiceinfo record);
 
     int updateByPrimaryKey(Invoiceinfo record);
+
+    List<Invoiceinfo> selectlist();
+
+    List<Invoiceinfo> selectlistbyfacno(String facno);
 }

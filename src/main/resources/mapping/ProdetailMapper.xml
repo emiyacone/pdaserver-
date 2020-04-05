@@ -209,4 +209,20 @@
       FacNo = #{facno,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="selectlist" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from prodetail
+    order by OrderNO asc
+  </select>
+
+  <select id="selectlistbyfacno" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List"/>
+    from prodetail
+    where FacNo = #{facno,jdbcType=VARCHAR}
+    order by OrderNO asc
+  </select>
+
 </mapper>
