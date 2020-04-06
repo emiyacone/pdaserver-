@@ -75,9 +75,10 @@
 
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>4.1.0</version>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
         </dependency>
+
     </dependencies>
 
     <build>
