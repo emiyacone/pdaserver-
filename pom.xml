@@ -81,6 +81,7 @@
     </dependencies>
 
     <build>
+        <finalName>graduationproject</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
