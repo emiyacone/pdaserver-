@@ -225,4 +225,32 @@
     order by OrderNO asc
   </select>
 
+  <select id="selectStacknoByBatch" resultType="string" parameterType="map">
+    select
+    StackNO
+    from prodetail
+    <where>
+      <if test="BatchNo!=null">
+        and BacketNO = #{BatchNo,jdbcType=VARCHAR}
+      </if>
+      <if test="facno!=null">
+        and FacNo = #{facno,jdbcType=VARCHAR}
+      </if>
+    </where>
+    group by StackNO
+  </select>
+
+  <select id="selectIdByStackno"  resultType="string" parameterType="map">
+    select
+    ID
+    from prodetail
+    <where>
+      <if test="StackNo!=null">
+        and StackNO = #{StackNo,jdbcType=VARCHAR}
+      </if>
+      <if test="facno!=null">
+        and FacNo = #{facno,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

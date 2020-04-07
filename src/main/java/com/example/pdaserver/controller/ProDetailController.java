@@ -43,4 +43,36 @@ public class ProDetailController {
         }
 
     }
+
+
+    // 查询树
+    @RequestMapping("listprotree.do")
+    @ResponseBody
+    public ServerResponse getlistprotree(HttpSession session,  @RequestParam("BatchNo") String Bactchno){
+        Userinfo userinfo=(Userinfo)session.getAttribute(Const.CURRENT_USER);
+        if(userinfo==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        String currentfacno=userinfo.getFacno();
+        if("0".equals(currentfacno))
+        {
+            return proservice.getProtree(Bactchno,null);
+        }
+        else{
+            return proservice.getProtree(Bactchno,currentfacno);
+        }
+
+    }
+
+    // 查询树
+    @RequestMapping("selectbyid.do")
+    @ResponseBody
+    public ServerResponse selectbyid(HttpSession session,  @RequestParam("ID") String id){
+        Userinfo userinfo=(Userinfo)session.getAttribute(Const.CURRENT_USER);
+        if(userinfo==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        return proservice.getprodetail(id);
+
+    }
 }
