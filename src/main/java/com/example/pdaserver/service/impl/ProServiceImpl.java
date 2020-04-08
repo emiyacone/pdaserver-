@@ -53,26 +53,40 @@ public class ProServiceImpl implements ProService {
         //startpage--start
         //填充数据
         //pagehelper收尾
+        //产品树
         List<StackNoTree> protree=new ArrayList<>();
+        //获取板号
         List<String> stacknolist=prodetailMapper.selectStacknoByBatch(BatchNo,facno);
-        StackNoTree stackTree=new StackNoTree();
-        StackNoTree idtree=new StackNoTree();
-        for(String stackno:stacknolist)
+        //父节点板树
+        StackNoTree stackTree;
+
+        if(stacknolist.size()>0)
         {
-            stackTree.setLabel(stackno);
-            List<String> idlist=prodetailMapper.selectIdByStackno(stackno,facno);
-            if(idlist.size()>0)
+            for(String stackno:stacknolist)
             {
-                List<StackNoTree> stacktree=new ArrayList<>();
-                for(String id:idlist)
+                stackTree=new StackNoTree();
+                stackTree.setLabel(stackno);
+                stackTree.setIsleaf(false);
+                List<String> idlist=prodetailMapper.selectIdByStackno(stackno,facno);
+                if(idlist.size()>0)
                 {
-                    idtree.setLabel(id);
+                    List<StackNoTree> stacktree=new ArrayList<>();
+                    StackNoTree idtree;
+                    for(String id:idlist)
+                    {
+                        //子节点id树
+                        idtree=new StackNoTree();
+                        idtree.setLabel(id);
+                        idtree.setIsleaf(true);
+                        stacktree.add(idtree);
+                    }
+
+                    stackTree.setChirden(stacktree);
                 }
-                stacktree.add(idtree);
-                stackTree.setChirden(stacktree);
+                protree.add(stackTree);
             }
-            protree.add(stackTree);
         }
+
         return  ServerResponse.createBySuccess("获取产品树成功",protree);
     }
 

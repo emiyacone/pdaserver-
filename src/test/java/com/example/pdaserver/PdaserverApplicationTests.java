@@ -20,7 +20,7 @@ class PdaserverApplicationTests {
     private ProService proservice;
     @Test
     void contextLoads() {
-       System.out.println(proservice.getProtree("1901164B72","2"));
+       System.out.println(prodetailMapper.selectStacknoByBatch("1901164B72",null));
     }
 
 }

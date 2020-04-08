@@ -11,6 +11,7 @@ import java.util.List;
 public class StackNoTree {
     private String label;//板号
     private List<StackNoTree> Chirden;//产品id列表
+    private boolean isleaf;//是否是叶节点
 
     public String getLabel() {
         return label;
@@ -26,5 +27,13 @@ public class StackNoTree {
 
     public void setChirden(List<StackNoTree> chirden) {
         Chirden = chirden;
+    }
+
+    public boolean isIsleaf() {
+        return isleaf;
+    }
+
+    public void setIsleaf(boolean isleaf) {
+        this.isleaf = isleaf;
     }
 }
