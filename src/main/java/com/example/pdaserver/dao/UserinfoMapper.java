@@ -3,6 +3,8 @@ package com.example.pdaserver.dao;
 import com.example.pdaserver.entity.Userinfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserinfoMapper {
     int deleteByPrimaryKey(String userno);
 
@@ -19,6 +21,8 @@ public interface UserinfoMapper {
     int checkUsername(String username);
 
     Userinfo selectlogin(@Param("username") String username, @Param("password") String password);
+
+    List<Userinfo> selectlist();
 
 
 }

@@ -3,12 +3,17 @@ package com.example.pdaserver.service.impl;
 import com.example.pdaserver.common.Const;
 import com.example.pdaserver.common.ServerResponse;
 import com.example.pdaserver.dao.UserinfoMapper;
+import com.example.pdaserver.entity.Prodetail;
 import com.example.pdaserver.entity.Userinfo;
 import com.example.pdaserver.service.UserService;
 import com.example.pdaserver.util.MD5Util;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @program: pdaserver
@@ -44,6 +49,7 @@ public class UserServiceImpl implements UserService {
 
 
     //注册
+    @Override
     public ServerResponse<String> register(Userinfo user){
 
         //MD5加密
@@ -54,5 +60,15 @@ public class UserServiceImpl implements UserService {
             return ServerResponse.createByErrorMessage("注册失败");
         }
         return  ServerResponse.createBySuccessMessage("注册成功");
+    }
+
+    //注册
+    @Override
+    public ServerResponse getlist(int pageNum,int pageSize){
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<Userinfo> userllist=userMapper.selectlist();
+        PageInfo pageresult=new PageInfo(userllist);
+        return  ServerResponse.createBySuccess(pageresult);
     }
 }

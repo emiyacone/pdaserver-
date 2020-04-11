@@ -12,4 +12,5 @@ import com.example.pdaserver.entity.Userinfo;
 public interface UserService {
     ServerResponse<Userinfo> login(String username, String password);
     ServerResponse<String> register(Userinfo user);
+    ServerResponse getlist(int pageNum,int pageSize);
 }

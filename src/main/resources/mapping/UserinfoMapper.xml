@@ -92,4 +92,10 @@
     where UserId=#{username}
     and Pwd=#{password}
   </select>
+
+  <select id="selectlist" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from userinfo
+  </select>
 </mapper>

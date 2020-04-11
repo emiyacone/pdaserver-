@@ -1,6 +1,7 @@
 package com.example.pdaserver.controller;
 
 import com.example.pdaserver.common.Const;
+import com.example.pdaserver.common.ResponseCode;
 import com.example.pdaserver.common.ServerResponse;
 import com.example.pdaserver.entity.Userinfo;
 import com.example.pdaserver.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -47,5 +49,24 @@ public class UserController {
     public ServerResponse<String> register(Userinfo user)
     {
         return UserService.register(user);
+    }
+
+    @RequestMapping(value = "list.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<String> list(HttpSession session, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize)
+    {
+        Userinfo userinfo=(Userinfo)session.getAttribute(Const.CURRENT_USER);
+        if(userinfo==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        String currentfacno=userinfo.getFacno();
+        if("0".equals(currentfacno))
+        {
+            return UserService.getlist(pageNum,pageSize);
+        }
+        else{
+            return ServerResponse.createByErrorMessage("不是超级管理员");
+        }
+
     }
 }
