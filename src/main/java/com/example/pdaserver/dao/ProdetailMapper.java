@@ -25,4 +25,8 @@ public interface ProdetailMapper {
     List<String> selectStacknoByBatch(@Param("BatchNo") String BatchNo,@Param("facno") String facno);
 
     List<String> selectIdByStackno(@Param("StackNo")String StackNo,@Param("facno") String facno);
+
+    List<Prodetail> selectByStackno(@Param("StackNo")String StackNo,@Param("facno") String facno);
+
+    List<Prodetail> selectByBatchNo(@Param("BatchNo")String BatchNo,@Param("facno") String facno);
 }

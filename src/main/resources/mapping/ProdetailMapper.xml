@@ -253,4 +253,33 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByStackno" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from prodetail
+    <where>
+      <if test="StackNo!=null">
+        and StackNO = #{StackNo,jdbcType=VARCHAR}
+      </if>
+      <if test="facno!=null">
+        and FacNo = #{facno,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByBatchNo" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from prodetail
+    <where>
+      <if test="BatchNo!=null">
+        and BacketNO = #{BatchNo,jdbcType=VARCHAR}
+      </if>
+      <if test="facno!=null">
+        and FacNo = #{facno,jdbcType=VARCHAR}
+      </if>
+    </where>
+    group by StackNO
+  </select>
 </mapper>

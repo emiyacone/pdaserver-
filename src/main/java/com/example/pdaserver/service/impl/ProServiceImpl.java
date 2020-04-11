@@ -99,4 +99,37 @@ public class ProServiceImpl implements ProService {
         Prodetail prodetail=prodetailMapper.selectByPrimaryKey(id);
         return  ServerResponse.createBySuccess(prodetail);
     }
+
+    //根据stackno查询产品明细
+    @Override
+    public ServerResponse getlistbystackno(int pageNum,int pageSize,String stackno,String facno) {
+        //startpage--start
+        //填充数据
+        //pagehelper收尾
+        PageHelper.startPage(pageNum,pageSize);
+        List<Prodetail> ProList=prodetailMapper.selectByStackno(stackno,facno);
+        PageInfo pageresult=new PageInfo(ProList);
+        return  ServerResponse.createBySuccess(pageresult);
+    }
+
+
+    //根据stackno查询产品明细
+    @Override
+    public ServerResponse getlistbyBatchno(int pageNum,int pageSize,String batchno,String facno) {
+        //startpage--start
+        //填充数据
+        //pagehelper收尾
+        PageHelper.startPage(pageNum,pageSize);
+        List<StackNoTree> protree=new ArrayList<>();
+        List<String> stacknolist=prodetailMapper.selectStacknoByBatch(batchno,facno);
+        StackNoTree stackTree;
+        for(String stackno:stacknolist)
+        {
+            stackTree=new StackNoTree();
+            stackTree.setLabel(stackno);
+            protree.add(stackTree);
+        }
+        PageInfo pageresult=new PageInfo(protree);
+        return  ServerResponse.createBySuccess(pageresult);
+    }
 }

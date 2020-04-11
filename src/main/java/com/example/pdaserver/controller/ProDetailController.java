@@ -75,4 +75,40 @@ public class ProDetailController {
         return proservice.getprodetail(id);
 
     }
+
+    // 根据板号查询
+    @RequestMapping("selectbystackno.do")
+    @ResponseBody
+    public ServerResponse selectbystackno(HttpSession session,@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize , @RequestParam("StackNo") String stackno){
+        Userinfo userinfo=(Userinfo)session.getAttribute(Const.CURRENT_USER);
+        if(userinfo==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        String currentfacno=userinfo.getFacno();
+        if("0".equals(currentfacno))
+        {
+            return proservice.getlistbystackno(pageNum,pageSize,stackno,null);
+        }
+        else{
+            return proservice.getlistbystackno(pageNum,pageSize,stackno,currentfacno);
+        }
+    }
+
+    // 根据板号查询
+    @RequestMapping("selectbybatchno.do")
+    @ResponseBody
+    public ServerResponse selectbybatchno(HttpSession session,@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize , @RequestParam("BatchNo") String batchno){
+        Userinfo userinfo=(Userinfo)session.getAttribute(Const.CURRENT_USER);
+        if(userinfo==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        String currentfacno=userinfo.getFacno();
+        if("0".equals(currentfacno))
+        {
+            return proservice.getlistbyBatchno(pageNum,pageSize,batchno,null);
+        }
+        else{
+            return proservice.getlistbyBatchno(pageNum,pageSize,batchno,currentfacno);
+        }
+    }
 }
