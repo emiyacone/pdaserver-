@@ -3,7 +3,7 @@ package com.example.pdaserver.entity;
 import java.util.Date;
 
 public class Invoicebackets {
-    private String id;
+    private Integer id;
 
     private String invoiceno;
 
@@ -15,12 +15,18 @@ public class Invoicebackets {
 
     private String facno;
 
-    public String getId() {
+    private Integer invoicetype;
+
+    private String stackno;
+
+    private String proid;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getInvoiceno() {
@@ -61,5 +67,29 @@ public class Invoicebackets {
 
     public void setFacno(String facno) {
         this.facno = facno == null ? null : facno.trim();
+    }
+
+    public Integer getInvoicetype() {
+        return invoicetype;
+    }
+
+    public void setInvoicetype(Integer invoicetype) {
+        this.invoicetype = invoicetype;
+    }
+
+    public String getStackno() {
+        return stackno;
+    }
+
+    public void setStackno(String stackno) {
+        this.stackno = stackno == null ? null : stackno.trim();
+    }
+
+    public String getProid() {
+        return proid;
+    }
+
+    public void setProid(String proid) {
+        this.proid = proid == null ? null : proid.trim();
     }
 }

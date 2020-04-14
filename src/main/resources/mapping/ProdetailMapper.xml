@@ -282,4 +282,22 @@
     </where>
     group by StackNO
   </select>
+
+  <update id="updateByid" parameterType="map">
+    update prodetail
+    set IsInvoice = #{isinvoice,jdbcType=INTEGER},
+    where ID = #{ID,jdbcType=CHAR}
+  </update>
+
+  <update id="updateBybacketno" parameterType="map">
+    update prodetail
+    set IsInvoice = #{isinvoice,jdbcType=INTEGER},
+    where BacketNO = #{BatchNo,jdbcType=CHAR}
+  </update>
+
+  <update id="updateBystackno" parameterType="map">
+    update prodetail
+    set IsInvoice = #{isinvoice,jdbcType=INTEGER},
+    where StackNO = #{Stackno,jdbcType=CHAR}
+  </update>
 </mapper>

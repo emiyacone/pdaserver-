@@ -44,4 +44,13 @@ public class InvoiceServiceImpl implements InvoiceService {
         PageInfo pageresult=new PageInfo(invoiceList);
         return  ServerResponse.createBySuccess(pageresult);
     }
+
+    @Override
+    public ServerResponse getinvoicebyno(String invoiceno) {
+
+        Invoiceinfo invoiceinfo=new Invoiceinfo();
+        invoiceinfo=invoiceinfoMapper.selectByPrimaryKey(invoiceno);
+        return  ServerResponse.createBySuccess(invoiceinfo);
+    }
+
 }

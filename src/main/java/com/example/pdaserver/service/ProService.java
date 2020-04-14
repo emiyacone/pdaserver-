@@ -9,4 +9,6 @@ public interface ProService {
     ServerResponse getprodetail(String id);
     ServerResponse getlistbystackno(int pageNum,int pageSize,String stackno,String facno);
     ServerResponse getlistbyBatchno(int pageNum,int pageSize,String batchno,String facno);
+    ServerResponse sendpro(String invoiceno,String allno,int invoicetype);
+    ServerResponse returnsales(String allno,int invoicetype);
 }

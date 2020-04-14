@@ -2,32 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pdaserver.dao.InvoicebacketsMapper">
   <resultMap id="BaseResultMap" type="com.example.pdaserver.entity.Invoicebackets">
-    <id column="ID" jdbcType="CHAR" property="id" />
+    <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="InvoiceNO" jdbcType="VARCHAR" property="invoiceno" />
     <result column="BacketNO" jdbcType="VARCHAR" property="backetno" />
     <result column="InvoiceTime" jdbcType="TIMESTAMP" property="invoicetime" />
     <result column="IsUpLoad" jdbcType="INTEGER" property="isupload" />
     <result column="FacNo" jdbcType="VARCHAR" property="facno" />
+    <result column="InvoiceType" jdbcType="INTEGER" property="invoicetype" />
+    <result column="StackNo" jdbcType="VARCHAR" property="stackno" />
+    <result column="ProID" jdbcType="VARCHAR" property="proid" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, InvoiceNO, BacketNO, InvoiceTime, IsUpLoad, FacNo
+    ID, InvoiceNO, BacketNO, InvoiceTime, IsUpLoad, FacNo, InvoiceType, StackNo, ProID
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from invoicebackets
-    where ID = #{id,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from invoicebackets
-    where ID = #{id,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.pdaserver.entity.Invoicebackets">
     insert into invoicebackets (ID, InvoiceNO, BacketNO, 
-      InvoiceTime, IsUpLoad, FacNo
+      InvoiceTime, IsUpLoad, FacNo, 
+      InvoiceType, StackNo, ProID
       )
-    values (#{id,jdbcType=CHAR}, #{invoiceno,jdbcType=VARCHAR}, #{backetno,jdbcType=VARCHAR}, 
-      #{invoicetime,jdbcType=TIMESTAMP}, #{isupload,jdbcType=INTEGER}, #{facno,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{invoiceno,jdbcType=VARCHAR}, #{backetno,jdbcType=VARCHAR}, 
+      #{invoicetime,jdbcType=TIMESTAMP}, #{isupload,jdbcType=INTEGER}, #{facno,jdbcType=VARCHAR}, 
+      #{invoicetype,jdbcType=INTEGER}, #{stackno,jdbcType=VARCHAR}, #{proid,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.pdaserver.entity.Invoicebackets">
@@ -51,10 +56,19 @@
       <if test="facno != null">
         FacNo,
       </if>
+      <if test="invoicetype != null">
+        InvoiceType,
+      </if>
+      <if test="stackno != null">
+        StackNo,
+      </if>
+      <if test="proid != null">
+        ProID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=CHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="invoiceno != null">
         #{invoiceno,jdbcType=VARCHAR},
@@ -70,6 +84,15 @@
       </if>
       <if test="facno != null">
         #{facno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetype != null">
+        #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="stackno != null">
+        #{stackno,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null">
+        #{proid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -91,8 +114,17 @@
       <if test="facno != null">
         FacNo = #{facno,jdbcType=VARCHAR},
       </if>
+      <if test="invoicetype != null">
+        InvoiceType = #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="stackno != null">
+        StackNo = #{stackno,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null">
+        ProID = #{proid,jdbcType=VARCHAR},
+      </if>
     </set>
-    where ID = #{id,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.pdaserver.entity.Invoicebackets">
     update invoicebackets
@@ -100,7 +132,36 @@
       BacketNO = #{backetno,jdbcType=VARCHAR},
       InvoiceTime = #{invoicetime,jdbcType=TIMESTAMP},
       IsUpLoad = #{isupload,jdbcType=INTEGER},
-      FacNo = #{facno,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=CHAR}
+      FacNo = #{facno,jdbcType=VARCHAR},
+      InvoiceType = #{invoicetype,jdbcType=INTEGER},
+      StackNo = #{stackno,jdbcType=VARCHAR},
+      ProID = #{proid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectBybacketno" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from invoicebackets
+    where BacketNO=#{backetno,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByinvoiceno" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from invoicebackets
+    where InvoiceNO=#{invoiceno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectBystackno" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from invoicebackets
+    where StackNo=#{stackno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByproid" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from invoicebackets
+    where ProID=#{proid,jdbcType=VARCHAR}
+  </select>
 </mapper>

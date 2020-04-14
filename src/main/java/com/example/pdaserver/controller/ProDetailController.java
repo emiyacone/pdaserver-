@@ -111,4 +111,18 @@ public class ProDetailController {
             return proservice.getlistbyBatchno(pageNum,pageSize,batchno,currentfacno);
         }
     }
+
+    // 发货
+    @RequestMapping("sendpro.do")
+    @ResponseBody
+    public ServerResponse sendpro( @RequestParam("InvoiceNo") String InvoiceNo , @RequestParam("ProId") String proid,@RequestParam("invoicetype")int invoicetype){
+        return proservice.sendpro(InvoiceNo,proid,invoicetype);
+    }
+
+    // 退货
+    @RequestMapping("returnpro.do")
+    @ResponseBody
+    public ServerResponse returnpro( @RequestParam("ProId") String proid,@RequestParam("invoicetype")int invoicetype){
+        return proservice.returnsales(proid,invoicetype);
+    }
 }
