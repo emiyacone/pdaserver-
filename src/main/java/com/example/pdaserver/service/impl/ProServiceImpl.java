@@ -214,7 +214,7 @@ public class ProServiceImpl implements ProService {
                     return ServerResponse.createByErrorMessage("在更新已发状态时出错");
                 }
             }
-            case 2: {
+            case 1: {
                 //获取这个板数的产品数量
                 result=prodetailMapper.selectByStackno(prodetail.getStackno(),null).size();
                 if(prodetailMapper.updateBystackno(invoicebackets.getStackno(),1)>=1)
@@ -267,7 +267,7 @@ public class ProServiceImpl implements ProService {
                     return ServerResponse.createByErrorMessage("在更新已发状态时出错");
                 }
             }
-            case 3: {
+            case 2: {
                 if(prodetailMapper.updateByid(invoicebackets.getProid(),1)>=1)
                 {
                     if(invoicebacketsMapper.selectByproid(prodetail.getId()).size()==0)
@@ -340,7 +340,7 @@ public class ProServiceImpl implements ProService {
                     return ServerResponse.createByErrorMessage("在更新已发状态时出错");
                 }
             }
-            case 2: {
+            case 1: {
                 if(prodetailMapper.updateBystackno(prodetail.getStackno(),0)>=1)
                 {
                     for(Invoicebackets invoicebackets:list)
@@ -370,17 +370,20 @@ public class ProServiceImpl implements ProService {
                     return ServerResponse.createByErrorMessage("在更新已发状态时出错");
                 }
             }
-            case 3: {
+            case 2: {
                 if(prodetailMapper.updateByid(prodetail.getId(),0)>=1)
                 {
                     for(Invoicebackets invoicebackets:list)
                     {
-                        if(invoicebacketsMapper.deleteByPrimaryKey(invoicebackets.getId())>=1)
+                        if(invoicebackets.getInvoicetype().equals(3))
                         {
-                            invoiceinfo=invoiceinfoMapper.selectByPrimaryKey(invoicebackets.getInvoiceno());
-                            invoiceinfo.setRealcount(invoiceinfo.getRealcount()-1);
-                            invoiceinfoMapper.updateByPrimaryKeySelective(invoiceinfo);
-                            result=result+1;
+                            if(invoicebacketsMapper.deleteByPrimaryKey(invoicebackets.getId())>=1)
+                            {
+                                invoiceinfo=invoiceinfoMapper.selectByPrimaryKey(invoicebackets.getInvoiceno());
+                                invoiceinfo.setRealcount(invoiceinfo.getRealcount()-1);
+                                invoiceinfoMapper.updateByPrimaryKeySelective(invoiceinfo);
+                                result=result+1;
+                            }
                         }
                     }
                     return ServerResponse.createBySuccess("退货成功",result);
