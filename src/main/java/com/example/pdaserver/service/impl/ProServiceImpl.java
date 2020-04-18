@@ -158,6 +158,7 @@ public class ProServiceImpl implements ProService {
         invoicebackets.setInvoicetype(invoicetype);
         invoicebackets.setInvoiceno(invoiceno);
         invoicebackets.setInvoicetime(date);
+        invoicebackets.setIsupload(1);
         switch (invoicetype) {
             case 0: {
                 //获取这个批次的产品数量
