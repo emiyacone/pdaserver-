@@ -148,8 +148,16 @@ public class ProServiceImpl implements ProService {
     public ServerResponse sendpro(String invoiceno,String allno,int invoicetype) {
         Invoicebackets invoicebackets=new Invoicebackets();
         Invoiceinfo invoiceinfo=invoiceinfoMapper.selectByPrimaryKey(invoiceno);
+        if(invoiceinfo==null)
+        {
+            return ServerResponse.createByErrorMessage("没有这个发货单");
+        }
         Prodetail prodetail=new Prodetail();
         prodetail=prodetailMapper.selectByPrimaryKey(allno);
+        if(prodetail==null)
+        {
+            return ServerResponse.createByErrorMessage("没有这个产品");
+        }
         int result=0;
         Date date=new Date();
         invoicebackets.setBacketno(prodetail.getBacketno());

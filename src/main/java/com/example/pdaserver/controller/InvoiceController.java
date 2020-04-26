@@ -3,7 +3,6 @@ package com.example.pdaserver.controller;
 import com.example.pdaserver.common.Const;
 import com.example.pdaserver.common.ResponseCode;
 import com.example.pdaserver.common.ServerResponse;
-import com.example.pdaserver.entity.Invoiceinfo;
 import com.example.pdaserver.entity.Userinfo;
 import com.example.pdaserver.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
