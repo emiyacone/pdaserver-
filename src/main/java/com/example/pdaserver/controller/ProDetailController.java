@@ -125,4 +125,19 @@ public class ProDetailController {
     public ServerResponse returnpro( @RequestParam("ProId") String proid,@RequestParam("invoicetype")int invoicetype){
         return proservice.returnsales(proid,invoicetype);
     }
+
+    // 查询树
+    @RequestMapping("querybyid.do")
+    @ResponseBody
+    public ServerResponse querybyid(@RequestParam("ID") String id){
+        return proservice.getprodetail(id);
+    }
+
+
+    @RequestMapping("resetprostack.do")
+    @ResponseBody
+    public ServerResponse resetprostack(@RequestParam("ADDPROID")String addproid,@RequestParam("ProNo")String ProNo,@RequestParam("returntype")String resettype)
+    {
+        return proservice.resetprostack(addproid,ProNo,resettype);
+    }
 }

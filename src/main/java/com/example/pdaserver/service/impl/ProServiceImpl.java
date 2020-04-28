@@ -306,6 +306,10 @@ public class ProServiceImpl implements ProService {
         Prodetail prodetail=new Prodetail();
         int result=0;
         prodetail=prodetailMapper.selectByPrimaryKey(allno);
+        if(prodetail==null)
+        {
+            return ServerResponse.createByErrorMessage("没有这个产品");
+        }
         Invoiceinfo invoiceinfo;
         List<Invoicebackets> list=invoicebacketsMapper.selectByproid(allno);
         switch (invoicetype) {
@@ -340,6 +344,10 @@ public class ProServiceImpl implements ProService {
                             }
 
                         }
+                    }
+                    if(result==0)
+                    {
+                        return ServerResponse.createByErrorMessage("没有产品退货");
                     }
                     return ServerResponse.createBySuccess("退货成功",result);
 
@@ -402,5 +410,51 @@ public class ProServiceImpl implements ProService {
             }
             default:return ServerResponse.createByErrorMessage("在更新已发状态时出错");
         }
+    }
+
+    //根据stackno查询产品明细
+    //addProid,重组后的
+    //resettype  0单桶1整版
+    @Override
+    public ServerResponse resetprostack(String addProid,String ProNo,String resettype) {
+        int count=0;
+        Prodetail prodetail=prodetailMapper.selectByPrimaryKey(addProid);
+        if(prodetail==null)
+        {
+            return ServerResponse.createByErrorMessage("被重组的产品id有误");
+        }
+        Prodetail prodetailupdate=prodetailMapper.selectByPrimaryKey(ProNo);
+        if(prodetailupdate==null)
+        {
+            return ServerResponse.createByErrorMessage("重组的产品id有误");
+        }
+        String stackno=prodetail.getStackno();
+        prodetailupdate.setStackno(stackno);
+        if("0".equals(resettype))
+        {
+            if(prodetailMapper.updateByPrimaryKeySelective(prodetailupdate)>0)
+            {
+                return ServerResponse.createBySuccessMessage("重组成功");
+            }
+        }
+        else{
+            List<Prodetail> prodetailList=prodetailMapper.selectByStackno(prodetailupdate.getStackno(),null);
+            for(Prodetail prodetailitem:prodetailList)
+            {
+                prodetailitem.setStackno(stackno);
+                if(prodetailMapper.updateByPrimaryKeySelective(prodetailitem)>0)
+                {
+                    count++;
+                }
+            }
+            if(count!=0)
+            {
+                return ServerResponse.createBySuccessMessage("重组成功");
+            }
+            else{
+                return ServerResponse.createByErrorMessage("无桶可重组");
+            }
+        }
+        return ServerResponse.createByErrorMessage("重组失败");
     }
 }
