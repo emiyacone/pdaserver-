@@ -429,22 +429,26 @@ public class ProServiceImpl implements ProService {
             return ServerResponse.createByErrorMessage("重组的产品id有误");
         }
         String stackno=prodetail.getStackno();
-        prodetailupdate.setStackno(stackno);
         if("0".equals(resettype))
         {
-            if(prodetailMapper.updateByPrimaryKeySelective(prodetailupdate)>0)
+            if(!prodetailupdate.getStackno().equals(stackno))
             {
-                return ServerResponse.createBySuccessMessage("重组成功");
+                prodetailupdate.setStackno(stackno);
+                if(prodetailMapper.updateByPrimaryKeySelective(prodetailupdate)>0)
+                {
+                    return ServerResponse.createBySuccessMessage("重组成功");
+                }
             }
         }
         else{
             List<Prodetail> prodetailList=prodetailMapper.selectByStackno(prodetailupdate.getStackno(),null);
             for(Prodetail prodetailitem:prodetailList)
             {
-                prodetailitem.setStackno(stackno);
-                if(prodetailMapper.updateByPrimaryKeySelective(prodetailitem)>0)
-                {
-                    count++;
+                if(!prodetailitem.getStackno().equals(stackno)) {
+                    prodetailitem.setStackno(stackno);
+                    if (prodetailMapper.updateByPrimaryKeySelective(prodetailitem) > 0) {
+                        count++;
+                    }
                 }
             }
             if(count!=0)
